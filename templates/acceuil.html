@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<h2>Bienvenue sur mon Application</h2>
+<form id="predictionForm" method="post" action="{{ url_for('accueil') }}">
+  <label for="csv_values">Valeurs CSV (séparées par des virgules):</label>
+  <input type="text" id="csv_values" name="csv_values" required><br><br>
+
+  <label for="num_critic_for_reviews">Num Critic For Reviews:</label>
+  <input type="text" id="num_critic_for_reviews" name="num_critic_for_reviews" required><br><br>
+
+  <label for="duration">Duration:</label>
+  <input type="text" id="duration" name="duration" required><br><br>
+
+  <label for="actor_3_fb_likes">Actor 3 FB Likes:</label>
+  <input type="text" id="actor_3_fb_likes" name="actor_3_fb_likes" required><br><br>
+
+  <label for="actor_1_fb_likes">Actor 1 FB Likes:</label>
+  <input type="text" id="actor_1_fb_likes" name="actor_1_fb_likes" required><br><br>
+
+  <label for="num_voted_users">Num Voted Users:</label>
+  <input type="text" id="num_voted_users" name="num_voted_users" required><br><br>
+
+  <label for="cast_total_fb_likes">Cast Total FB Likes:</label>
+  <input type="text" id="cast_total_fb_likes" name="cast_total_fb_likes" required><br><br>
+
+  <label for="facenumber_in_poster">Facenumber In Poster:</label>
+  <input type="text" id="facenumber_in_poster" name="facenumber_in_poster" required><br><br>
+
+  <label for="num_user_for_reviews">Num User For Reviews:</label>
+  <input type="text" id="num_user_for_reviews" name="num_user_for_reviews" required><br><br>
+
+  <label for="actor_2_fb_likes">Actor 2 FB Likes:</label>
+  <input type="text" id="actor_2_fb_likes" name="actor_2_fb_likes" required><br><br>
+
+  <label for="movie_fb_likes">Movie FB Likes:</label>
+  <input type="text" id="movie_fb_likes" name="movie_fb_likes" required><br><br>
+
+  <input type="submit" value="Prédire">
+</form>
+
+<script>
+  // Fonction pour remplir les champs du formulaire avec les valeurs CSV
+  function remplirChampsCSV() {
+    var csv_values = document.getElementById('csv_values').value.trim();
+    var champs = csv_values.split(',');
+
+    // Ignorer l'avant-dernière valeur pour remplir les champs
+    document.getElementById('num_critic_for_reviews').value = champs[0].trim();
+    document.getElementById('duration').value = champs[1].trim();
+    document.getElementById('actor_3_fb_likes').value = champs[2].trim();
+    document.getElementById('actor_1_fb_likes').value = champs[3].trim();
+    document.getElementById('num_voted_users').value = champs[4].trim();
+    document.getElementById('cast_total_fb_likes').value = champs[5].trim();
+    document.getElementById('facenumber_in_poster').value = champs[6].trim();
+    document.getElementById('num_user_for_reviews').value = champs[7].trim();
+    document.getElementById('actor_2_fb_likes').value = champs[8].trim();
+    document.getElementById('movie_fb_likes').value = champs[10].trim();  // Ignorer l'avant-dernière valeur
+
+    // Afficher la valeur réelle
+    document.getElementById('valeur_reelle').textContent = "Valeur réelle : " + champs[9].trim();
+  }
+
+  // Écouter l'événement de soumission du formulaire
+  document.getElementById('predictionForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    remplirChampsCSV();
+    this.submit();
+  });
+
+  // Écouter l'événement de changement du champ "Valeurs CSV"
+  document.getElementById('csv_values').addEventListener('change', function (event) {
+    remplirChampsCSV();
+  });
+</script>
+
+<p id="valeur_reelle"></p>
+{% endblock %}

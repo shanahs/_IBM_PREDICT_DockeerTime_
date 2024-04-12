@@ -1,0 +1,9 @@
+{% block content %}
+<h2>Résultat de la Prédiction</h2>
+{% if prediction is not none %}
+<p>Valeur réelle : {{ valeur_reelle }}</p>
+<p>Valeur prédite : {{ prediction }}</p>
+{% else %}
+<p>Le modèle n'a pas pu faire de prédiction pour ces données.</p>
+{% endif %}
+{% endblock %}
